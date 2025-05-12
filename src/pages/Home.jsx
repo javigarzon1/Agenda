@@ -1,52 +1,31 @@
-import {useNavigate} from "react-router-dom";
-export const Home = () => {
-	const navigate = useNavigate();
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useStore } from "../hooks/store";
+import ContactCard from "../components/ContactCard";
 
-	return (
-		<div className="text-center mt-5">
-			<h1 className="text-4xl font-bold">Welcome to the Home Page</h1>
-		
-		<div className="row">
-			<div className="col-md-6">
-				<div className="card mb-3 h-100 cursor-pointer"
-					onClick={() => navigate("/about")}
-					style={{ cursor: 'pointer' }}
-				>
-					<div className="card-body text-center">
-						<h5 className="card-title h4 mb-3">About Us</h5>
-						<p className="card-text text-muted">Learn more about us.</p>
-					</div>
-				</div>
-			</div>
-			<div className="col-md-6">
-				<div className="card mb-3 h-100 cursor-pointer"
-					onClick={() => navigate("/contact")}
-					style={{ cursor: 'pointer' }}
-				>
-					<div className="card-body text-center">
-						<h5 className="card-title h4 mb-3">Contact Us</h5>
-						<p className="card-text text-muted">Get in touch with us.</p>
-					</div>
-				</div>
-			<div className="col">
-				<button
-					className="btn btn-secondary mt-3"
-					onClick={() => navigate("/contact")}
-				>
-					Go to Contact Page
-				</button>
-			</div>
-			<div className="col">
-				<button
-					className="btn btn-success mt-3"
-					onClick={() => navigate("/services")}
-				>
-					Go to Services Page
-				</button>
-			</div>
-		</div>
-		</div>
-				</div>
+const Home = () => {
+  const { state } = useStore();
+  const navigate = useNavigate();
 
-	
-)} ;
+  return (
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">Lista de Contactos</h1>
+      <div className="d-flex justify-content-end mb-3">
+        <Link to="/add-contact" className="btn btn-primary">
+          Añadir Contacto
+        </Link>
+      </div>
+      <div className="row">
+        {state.contacts && state.contacts.length > 0 ? (
+          state.contacts.map((contact) => (
+            <ContactCard key={contact.id} contact={contact} />
+          ))
+        ) : (
+          <p>No hay contactos disponibles.</p>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Home;
