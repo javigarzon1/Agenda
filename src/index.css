@@ -1,0 +1,102 @@
+/* src/index.css */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+  color: #2f3640;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #192a56;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #dcdde1;
+  border-radius: 6px;
+}
+
+form input {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+button {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Contact Card */
+.contact-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-info p {
+  margin: 4px 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn-edit {
+  background-color: #44bd32;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #e84118;
+  color: white;
+}
+
+.btn-add {
+  background-color: #0097e6;
+  color: white;
+  margin-bottom: 20px;
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 600px) {
+  .actions {
+    flex-direction: row;
+  }
+}

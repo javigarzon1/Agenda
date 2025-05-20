@@ -4,7 +4,7 @@ import { useStore } from "../hooks/store";
 import ContactCard from "../components/ContactCard";
 
 const Home = () => {
-  const { state } = useStore();
+  const { store } = useStore(); 
   const navigate = useNavigate();
 
   return (
@@ -16,8 +16,8 @@ const Home = () => {
         </Link>
       </div>
       <div className="row">
-        {state.contacts && state.contacts.length > 0 ? (
-          state.contacts.map((contact) => (
+        {store.contacts && store.contacts.length > 0 ? (
+          store.contacts.map((contact) => (
             <ContactCard key={contact.id} contact={contact} />
           ))
         ) : (

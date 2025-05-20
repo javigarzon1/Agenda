@@ -1,8 +1,6 @@
-// src/components/ContactCard.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../hooks/store";
-import ModalConfirmDelete from "../hooks/ModalConfirmDelete";
 
 const ContactCard = ({ contact }) => {
   const navigate = useNavigate();
@@ -12,7 +10,7 @@ const ContactCard = ({ contact }) => {
   const handleDelete = async () => {
     try {
       const res = await fetch(
-        `https://playground.4geeks.com/apis/fake/contact/${contact.id}`,
+        `https://playground.4geeks.com/todo/users/javigarzon${contact.id}`,
         {
           method: "DELETE",
         }

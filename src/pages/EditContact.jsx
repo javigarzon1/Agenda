@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useStore } from "../hooks/store";
 
 const EditContact = () => {
-  const { state, dispatch } = useStore();
+  const { store, dispatch } = useStore();
   const navigate = useNavigate();
   const { id } = useParams();
   const [form, setForm] = useState({
@@ -29,7 +29,7 @@ const EditContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`https://playground.4geeks.com/apis/fake/contact/javigarzon`, {
+      const res = await fetch(`https://playground.4geeks.com/todo/users/javigarzon`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

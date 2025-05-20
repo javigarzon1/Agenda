@@ -1,60 +1,62 @@
-import React, { createContext, useReducer, useContext, useEffect } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 
-const initialState = {
+export const initialState = {
   contacts: [],
 };
 
-const reducer = (state, action) => {
+export const reducer = (store, action) => {
   switch (action.type) {
     case "SET_CONTACTS":
-      return { ...state, contacts: action.payload };
+      return { ...store, contacts: action.payload };
     case "ADD_CONTACT":
-      return { ...state, contacts: [...state.contacts, action.payload] };
+      return { ...store, contacts: [...store.contacts, action.payload] };
     case "UPDATE_CONTACT":
       return {
-        ...state,
-        contacts: state.contacts.map((contact) =>
+        ...store,
+        contacts: store.contacts.map((contact) =>
           contact.id === action.payload.id ? action.payload : contact
         ),
       };
     case "DELETE_CONTACT":
       return {
-        ...state,
-        contacts: state.contacts.filter((contact) => contact.id !== action.payload),
+        ...store,
+        contacts: store.contacts.filter(
+          (contact) => contact.id !== action.payload
+        ),
       };
     default:
-      return state;
+      return store;
   }
 };
 
+// Crear contexto
 const StoreContext = createContext();
 
+// Proveedor del contexto
 export const StoreProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [store, dispatch] = useReducer(reducer, initialState);
 
-  useEffect(() => {
-    const fetchContacts = async () => {
-      try {
-        const res = await fetch(
-          "https://playground.4geeks.com/apis/fake/contact/agenda/javigarzon"
-        );
-        const data = await res.json();
-        dispatch({ type: "SET_CONTACTS", payload: data });
-      } catch (error) {
-        console.error("Error fetching contacts:", error);
-      }
-    };
+ useEffect(() => {
+  const fetchContacts = async () => {
+    try {
+      const res = await fetch("https://playground.4geeks.com/todo/users/javigarzon");
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      const data = await res.json();
+      dispatch({ type: "SET_CONTACTS", payload: data });
+    } catch (error) {
+      console.error("Error fetching contacts:", error);
+      dispatch({ type: "SET_CONTACTS", payload: [] }); // Opcional, limpia la lista
+    }
+  };
 
-    fetchContacts();
-  }, []);
+  fetchContacts();
+}, []);
 
   return (
-    <StoreContext.Provider value={{ store: state, dispatch }}>
+    <StoreContext.Provider value={{ store, dispatch }}>
       {children}
     </StoreContext.Provider>
   );
 };
 
 export const useStore = () => useContext(StoreContext);
-export default StoreProvider;
-export { initialState, reducer };

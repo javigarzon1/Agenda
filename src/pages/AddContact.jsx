@@ -20,7 +20,7 @@ const AddContact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://playground.4geeks.com/apis/fake/contact/javigarzon", {
+      const res = await fetch("https://playground.4geeks.com/todo/users/javigarzon", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
